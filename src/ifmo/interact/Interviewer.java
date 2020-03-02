@@ -1,7 +1,5 @@
 package ifmo.interact;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -12,12 +10,6 @@ public class Interviewer implements CanInterview {
 
     public Interviewer(Scanner in) {
         this.in = in;
-        this.out = new PrintWriter(System.out);
-    }
-
-    public Interviewer(InputStream in, OutputStream out) {
-        this.in = new Scanner(in);
-        this.out = new PrintWriter(out);
     }
 
     @Override
@@ -42,7 +34,7 @@ public class Interviewer implements CanInterview {
     @Override
     public boolean prompt(String question, String[] positive, String[] negative) {
         String answer = askString(question).trim().toLowerCase();
-        out.println();
+        System.out.println();
         for (String option : positive) {
             if (answer.equals(option)) return true;
         }
@@ -54,13 +46,13 @@ public class Interviewer implements CanInterview {
 
     @Override
     public String askString(String question) {
-        out.print(question + VISUAL_AID);
-        return in.next();
+        System.out.print(question + VISUAL_AID);
+        return in.nextLine();
     }
 
     @Override
     public int askInteger(String question) {
-        out.print(question + VISUAL_AID);
+        System.out.print(question + VISUAL_AID);
         return in.nextInt();
     }
 }

@@ -1,5 +1,6 @@
-package ifmo.math.structures;
+package test.math;
 
+import ifmo.math.structures.Matrix;
 import org.junit.Test;
 
 import java.util.Arrays;

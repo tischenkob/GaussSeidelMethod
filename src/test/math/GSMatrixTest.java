@@ -1,5 +1,6 @@
-package ifmo.math.structures;
+package test.math;
 
+import ifmo.math.structures.GSMatrix;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

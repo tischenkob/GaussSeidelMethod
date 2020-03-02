@@ -1,8 +1,11 @@
 import ifmo.interact.Interviewer;
 import ifmo.math.factories.MatrixFactory;
-import ifmo.math.structures.Matrix;
+import ifmo.math.slae.GaussSeidelMethod;
+import ifmo.math.structures.GSMatrix;
+import ifmo.math.structures.Vector;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
@@ -18,14 +21,22 @@ public class Main {
 
         while (dataIn == null) {
             try {
-                filePath = i9r.askString("Enter file path or leave blank for console input");
+                filePath = i9r.askString("Enter file path or leave blank for console input: ");
                 dataIn = (filePath.isBlank())
                         ? scanner
                         : new Scanner(new File(filePath));
-            } catch (Exception e) {
-
+            } catch (FileNotFoundException ex) {
+                System.out.println("No such file in this location.");
             }
         }
-        Matrix matrix = MatrixFactory.createMatrix(dataIn);
+        GSMatrix matrix = MatrixFactory.createGSMatrix(dataIn);
+        System.out.print("Precision: ");
+        double epsilon = scanner.nextDouble();
+
+        if (matrix.isDiagonallyDominant()) {
+            GaussSeidelMethod gsMethod = new GaussSeidelMethod(epsilon);
+
+            System.out.println(new Vector(gsMethod.solve(matrix)));
+        }
     }
 }
