@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Interviewer implements CanInterview {
-    private final String VISUAL_AID = " > ";
+    private final String VISUAL_AID = " ";
     Scanner in;
     PrintWriter out;
 
@@ -54,5 +54,11 @@ public class Interviewer implements CanInterview {
     public int askInteger(String question) {
         System.out.print(question + VISUAL_AID);
         return in.nextInt();
+    }
+
+    @Override
+    public double askDouble(String question) {
+        System.out.print(question + VISUAL_AID);
+        return in.nextDouble();
     }
 }

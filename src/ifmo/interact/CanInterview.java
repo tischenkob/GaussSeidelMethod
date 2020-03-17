@@ -10,4 +10,6 @@ public interface CanInterview {
     String askString(String question);
 
     int askInteger(String question);
+
+    double askDouble(String question);
 }

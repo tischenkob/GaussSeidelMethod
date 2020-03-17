@@ -53,6 +53,21 @@ public class Matrix {
         }
     }
 
+    public boolean isDiagonallyDominant() {
+        double[][] m = getMatrix();
+        int size = getSize();
+        for (int i = 0; i < size; i++) {
+            double sum = 0;
+            double absEl = Math.abs(m[i][i]);
+            if (absEl == 0) return false;
+            for (int j = 0; j < size; j++) {
+                if (j != i) sum += Math.abs(m[i][j]);
+                if (absEl < sum) return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         String string = "Matrix {\n";

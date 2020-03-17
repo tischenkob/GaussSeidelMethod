@@ -1,5 +1,7 @@
 package ifmo.math.structures;
 
+import ifmo.math.exceptions.NotDiagonallyDominantException;
+
 public class GSMatrix extends Matrix {
 
     public GSMatrix(int i) {
@@ -10,24 +12,12 @@ public class GSMatrix extends Matrix {
         super(matrix);
     }
 
-    public GSMatrix(Matrix matrix) {
+    public GSMatrix(Matrix matrix) throws NotDiagonallyDominantException {
+        if (!matrix.isDiagonallyDominant()) throw new NotDiagonallyDominantException();
         this.setMatrix(matrix.getMatrix());
         this.setSize(matrix.getSize());
     }
 
-    public boolean isDiagonallyDominant() {
-        double[][] m = getMatrix();
-        int size = getSize();
-        for (int i = 0; i < size; i++) {
-            double sum = 0;
-            double absEl = Math.abs(m[i][i]);
-            for (int j = 0; j < size; j++) {
-                if (j != i) sum += Math.abs(m[i][j]);
-                if (absEl < sum) return false;
-            }
-        }
-        return true;
-    }
 
     public void makeDiagonallyDominant() {
         /* TODO if enough time */

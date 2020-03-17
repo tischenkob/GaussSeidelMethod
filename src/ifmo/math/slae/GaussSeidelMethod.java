@@ -8,6 +8,11 @@ import static java.lang.Math.abs;
 
 public class GaussSeidelMethod {
     private double epsilon;
+
+    public int getIterationsCount() {
+        return iterationsCount;
+    }
+
     private int iterationsCount = 0;
 
     public GaussSeidelMethod(double epsilon) {
