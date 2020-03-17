@@ -1,5 +1,5 @@
 import ifmo.interact.Interviewer;
-import ifmo.math.factories.MatrixFactory;
+import ifmo.math.readers.MatrixReader;
 import ifmo.math.slae.GaussSeidelMethod;
 import ifmo.math.structures.GSMatrix;
 import ifmo.math.structures.Vector;
@@ -17,18 +17,21 @@ public class Main {
         Scanner dataIn = null;
 
         System.out.println("Welcome! This application's sole purpose is to solve Systems of Linear Algebraic Equations (SLAE).");
-
+        boolean makeSilent = false;
         while (dataIn == null) {
             try {
                 filePath = i9r.askString("Enter file path or leave blank for console input: ");
-                dataIn = (filePath.isBlank())
-                        ? scanner
-                        : new Scanner(new File(filePath));
+                if (filePath.isBlank()) dataIn = scanner;
+                else {
+                    dataIn = new Scanner(new File(filePath));
+                    makeSilent = true;
+                }
             } catch (FileNotFoundException ex) {
                 System.out.println("No such file in this location.");
             }
         }
-        GSMatrix matrix = MatrixFactory.createGSMatrix(dataIn);
+        MatrixReader reader = new MatrixReader(makeSilent);
+        GSMatrix matrix = MatrixReader.createGSMatrix(dataIn);
         System.out.print("Precision: ");
         double epsilon = scanner.nextDouble();
 

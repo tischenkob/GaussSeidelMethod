@@ -10,6 +10,11 @@ public class GSMatrix extends Matrix {
         super(matrix);
     }
 
+    public GSMatrix(Matrix matrix) {
+        this.setMatrix(matrix.getMatrix());
+        this.setSize(matrix.getSize());
+    }
+
     public boolean isDiagonallyDominant() {
         double[][] m = getMatrix();
         int size = getSize();
