@@ -24,7 +24,7 @@ public class GaussSeidelMethod {
         while (notSolved) {
             double[] newX = iterate(coefs, x);
             iterationsCount++;
-            notSolved = !elementsAreEpsilonDifferent(epsilon, x, newX);
+            notSolved = !areEpsilonDifferent(epsilon, x, newX);
             x = newX;
         }
 
@@ -35,7 +35,7 @@ public class GaussSeidelMethod {
         double[] newValues = oldValues.clone();
         for (int i = 0; i < oldValues.length; i++) {
             double[] row = coefs[i];
-            double sum = row[coefs.length - 1];
+            double sum = row[row.length - 1];
             for (int j = 0; j < i; j++)
                 sum -= row[j] * newValues[j];
 
@@ -48,7 +48,7 @@ public class GaussSeidelMethod {
         return newValues;
     }
 
-    public boolean elementsAreEpsilonDifferent(double eps, double[] arr1, double[] arr2) {
+    public boolean areEpsilonDifferent(double eps, double[] arr1, double[] arr2) {
         final double ERROR = 0.000000000001;
         if (arr1.length != arr2.length) return false;
         for (int i = 0; i < arr1.length; i++) {

@@ -13,12 +13,12 @@ public class GaussSeidelMethodTest {
 
     @Test
     public void solve() {
-        double epsilon = 0.0000000000000001;
+        double epsilon = 0.0000000001;
         GaussSeidelMethod method = new GaussSeidelMethod(epsilon);
         double[][] auxM = {
                 {6, 1, 3, 18},
                 {2, 5, -1, -18},
-                {-4, 3, 8, 28}
+                {-4, 3, 8, 27}
         };
         double[] res = method.solve(new GSMatrix(auxM));
         System.out.println(Arrays.toString(res));
@@ -51,10 +51,10 @@ public class GaussSeidelMethodTest {
         double[] X2 = {1.001, 2.0005, 3.0};
         double[] X3 = {1, 2, 3, 4};
         double[] X4 = {1.002, 2, 3};
-        boolean test1 = m.elementsAreEpsilonDifferent(epsilon, X1, X2);
-        boolean test2 = m.elementsAreEpsilonDifferent(epsilon, X1, X3);
-        boolean test3 = m.elementsAreEpsilonDifferent(epsilon, X1, X4);
-        boolean test4 = m.elementsAreEpsilonDifferent(epsilon, X2, X4);
+        boolean test1 = m.areEpsilonDifferent(epsilon, X1, X2);
+        boolean test2 = m.areEpsilonDifferent(epsilon, X1, X3);
+        boolean test3 = m.areEpsilonDifferent(epsilon, X1, X4);
+        boolean test4 = m.areEpsilonDifferent(epsilon, X2, X4);
         assertTrue(test1);
         assertFalse(test2);
         assertFalse(test3);
