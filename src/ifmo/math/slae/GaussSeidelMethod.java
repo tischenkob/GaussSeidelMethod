@@ -8,17 +8,9 @@ import static java.lang.Math.abs;
 
 public class GaussSeidelMethod {
     private double epsilon;
-    private int lastIterations = 0;
+    private int iterationsCount = 0;
 
     public GaussSeidelMethod(double epsilon) {
-        this.epsilon = epsilon;
-    }
-
-    public double getEpsilon() {
-        return epsilon;
-    }
-
-    public void setEpsilon(float epsilon) {
         this.epsilon = epsilon;
     }
 
@@ -28,8 +20,10 @@ public class GaussSeidelMethod {
         double[][] coefs = matrix.getMatrix();
 
         boolean notSolved = true;
+        iterationsCount = 0;
         while (notSolved) {
             double[] newX = iterate(coefs, x);
+            iterationsCount++;
             notSolved = !elementsAreEpsilonDifferent(epsilon, x, newX);
             x = newX;
         }
