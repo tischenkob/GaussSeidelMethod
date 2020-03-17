@@ -49,9 +49,10 @@ public class GaussSeidelMethod {
     }
 
     public boolean elementsAreEpsilonDifferent(double eps, double[] arr1, double[] arr2) {
+        final double ERROR = 0.000000000001;
         if (arr1.length != arr2.length) return false;
         for (int i = 0; i < arr1.length; i++) {
-            if (abs(arr1[i] - arr2[i]) >= (eps + 0.000000000001)) return false;
+            if (abs(arr1[i] - arr2[i]) >= (eps + ERROR)) return false;
         }
         return true;
     }
