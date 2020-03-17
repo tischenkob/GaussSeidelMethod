@@ -6,24 +6,34 @@ public class GSMatrix extends Matrix {
         super(i);
     }
 
+    public GSMatrix(double[][] matrix) {
+        super(matrix);
+    }
+
     public boolean isDiagonallyDominant() {
-        for (int i = 0; i < getSize(); i++) {
-            for (int j = 0; j < getSize(); j++) {
-                if (getMatrix()[i][i] < getMatrix()[i][j]) return false;
+        double[][] m = getMatrix();
+        int size = getSize();
+        for (int i = 0; i < size; i++) {
+            double sum = 0;
+            double absEl = Math.abs(m[i][i]);
+            for (int j = 0; j < size; j++) {
+                if (j != i) sum += Math.abs(m[i][j]);
+                if (absEl < sum) return false;
             }
         }
         return true;
     }
 
     public void makeDiagonallyDominant() {
-
+        /* TODO if enough time */
     }
 
     public double[][] divideByMainDiagonal() {
         double[][] coefs = this.getMatrix().clone();
         for (int i = 0; i < this.getSize(); i++) {
+            double ai = coefs[i][i];
             for (int j = 0; j < this.getSize() + 1; j++) {
-                coefs[i][j] /= coefs[i][i];
+                coefs[i][j] /= ai;
             }
         }
         return coefs;

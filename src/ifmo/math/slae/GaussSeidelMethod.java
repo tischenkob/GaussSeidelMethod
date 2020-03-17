@@ -23,35 +23,41 @@ public class GaussSeidelMethod {
     }
 
     public double[] solve(GSMatrix matrix) {
-        double[] old_x = new double[matrix.getSize()];
-        Arrays.fill(old_x, 0);
-        double[] new_x = old_x.clone();
-        double[][] coefs = matrix.divideByMainDiagonal();
-        iterate(coefs, old_x, new_x);
+        double[] x = new double[matrix.getSize()];
+        Arrays.fill(x, 0);
+        double[][] coefs = matrix.getMatrix();
 
-        while (!elementsAreEpsilonDifferent(epsilon, old_x, new_x)) {
-            iterate(coefs, old_x, new_x);
+        boolean notSolved = true;
+        while (notSolved) {
+            double[] newX = iterate(coefs, x);
+            notSolved = !elementsAreEpsilonDifferent(epsilon, x, newX);
+            x = newX;
         }
 
-        return new_x;
+        return x;
     }
 
-    public void iterate(double[][] coefs, double[] oldArr, double[] newArr) {
-        oldArr = newArr.clone();
+    public double[] iterate(double[][] coefs, double[] oldValues) {
+        double[] newValues = oldValues.clone();
+        for (int i = 0; i < oldValues.length; i++) {
+            double[] row = coefs[i];
+            double sum = row[coefs.length - 1];
+            for (int j = 0; j < i; j++)
+                sum -= row[j] * newValues[j];
 
-        for (int i = 0; i < oldArr.length; i++) {
-            double sum = 0;
-            for (int j = 0; j < i; j++) sum += coefs[i][j] * oldArr[i];
-            for (int j = i + 1; j < oldArr.length - 1; j++) sum += coefs[i][j] * oldArr[i];
-            sum -= coefs[i][coefs.length - 1];
-            newArr[i] = sum;
+            for (int j = i + 1; j < oldValues.length; j++)
+                sum -= row[j] * oldValues[j];
+
+
+            newValues[i] = sum / coefs[i][i];
         }
+        return newValues;
     }
 
     public boolean elementsAreEpsilonDifferent(double eps, double[] arr1, double[] arr2) {
         if (arr1.length != arr2.length) return false;
         for (int i = 0; i < arr1.length; i++) {
-            if (abs(arr1[i] - arr2[i]) >= eps) return false;
+            if (abs(arr1[i] - arr2[i]) >= (eps + 0.000000000001)) return false;
         }
         return true;
     }
