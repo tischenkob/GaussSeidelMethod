@@ -18,11 +18,6 @@ public class GSMatrix extends Matrix {
         this.setSize(matrix.getSize());
     }
 
-
-    public void makeDiagonallyDominant() {
-        /* TODO if enough time */
-    }
-
     public double[][] divideByMainDiagonal() {
         double[][] coefs = this.getMatrix().clone();
         for (int i = 0; i < this.getSize(); i++) {

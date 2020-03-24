@@ -39,8 +39,17 @@ public class Main {
         while (matrix == null) {
             try {
                 Matrix auxMatrix = reader.createMatrix();
-                auxMatrix = new GSMatrix(auxMatrix);
-                matrix = (GSMatrix) auxMatrix;
+                if (!auxMatrix.isDiagonallyDominant()) {
+                    System.out.println("The matrix is not diagonally dominant. Trying to transform.");
+                    if (auxMatrix.achieveDiagonalDominance()) {
+                        System.out.println("The matrix has been transformed.");
+                        System.out.println(auxMatrix);
+                    } else {
+                        throw new NotDiagonallyDominantException();
+                    }
+                }
+
+                matrix = new GSMatrix(auxMatrix);
 
                 double epsilon = reader.readEpsilon(dataIn);
                 GaussSeidelMethod gsMethod = new GaussSeidelMethod(epsilon);
