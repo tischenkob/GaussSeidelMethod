@@ -3,10 +3,12 @@ package ifmo.math.readers;
 import ifmo.math.structures.Matrix;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MatrixReader {
     protected boolean isNotSilent = false;
+    protected boolean isRandom = false;
     private Scanner in;
 
     public MatrixReader(Scanner in) {
@@ -40,6 +42,10 @@ public class MatrixReader {
                 System.out.println("Incorrect value. Please enter a correct value.");
                 in = new Scanner(System.in);
                 size = -1;
+            } catch (NoSuchElementException e) {
+                System.out.println("Error with the file. Please enter a correct value.");
+                in = new Scanner(System.in);
+                size = -1;
             }
         }
         if (isNotSilent) System.out.println(size);
@@ -55,11 +61,14 @@ public class MatrixReader {
         double[][] matrix = null;
         double[][] auxMatrix = new double[size][size + 1];
         while (matrix == null) {
-            System.out.println("Matrix: ");
+            System.out.println("Matrix (leave blank for random): ");
+            String input = in.nextLine();
+            isRandom = input.isEmpty() || input.isBlank();
+            if (isRandom) isNotSilent = true;
             try {
                 for (int i = 0; i < size; i++) {
                     for (int j = 0; j < size + 1; j++) {
-                        auxMatrix[i][j] = in.nextDouble();
+                        auxMatrix[i][j] = isRandom ? Math.random() : in.nextDouble();
                         if (isNotSilent) System.out.print(auxMatrix[i][j] + " ");
                     }
                     if (isNotSilent) System.out.println();

@@ -54,7 +54,7 @@ public class Main {
                 double epsilon = reader.readEpsilon(dataIn);
                 GaussSeidelMethod gsMethod = new GaussSeidelMethod(epsilon);
 
-                System.out.println(new Vector(gsMethod.solve(matrix)));
+                System.out.println("Solution: " + new Vector(gsMethod.solve(matrix)));
                 System.out.println("Solved in " + gsMethod.getIterationsCount() + " iterations.");
             } catch (NotDiagonallyDominantException e) {
                 System.out.println(e.getMessage());

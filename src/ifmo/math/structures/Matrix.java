@@ -101,7 +101,7 @@ public class Matrix {
         for (int i = 0; i < row.length - 1; i++) {
             sum += row[i];
         }
-        for (int i = 0; i < row.length; i++) {
+        for (int i = 0; i < row.length - 1; i++) {
             if ((row[i] * 2) >= sum) return i;
         }
         return 0;
