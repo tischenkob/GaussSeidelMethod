@@ -61,9 +61,11 @@ public class MatrixReader {
         double[][] matrix = null;
         double[][] auxMatrix = new double[size][size + 1];
         while (matrix == null) {
-            System.out.println("Matrix (leave blank for random): ");
-            String input = in.nextLine();
-            isRandom = input.isEmpty() || input.isBlank();
+            System.out.println("Matrix (type 'r' or any non-digit key for random): ");
+            in.nextLine();
+//            String input = in.nextLine().trim();
+//            isRandom = "".equals(input);
+            isRandom = !in.hasNextDouble();
             if (isRandom) isNotSilent = true;
             try {
                 for (int i = 0; i < size; i++) {
@@ -79,6 +81,7 @@ public class MatrixReader {
                 in = new Scanner(System.in);
             }
         }
+        isNotSilent = false;
         return matrix;
     }
 

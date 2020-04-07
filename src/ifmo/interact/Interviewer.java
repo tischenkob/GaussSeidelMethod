@@ -1,6 +1,7 @@
 package ifmo.interact;
 
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Interviewer implements CanInterview {
@@ -52,13 +53,29 @@ public class Interviewer implements CanInterview {
 
     @Override
     public int askInteger(String question) {
-        System.out.print(question + VISUAL_AID);
-        return in.nextInt();
+        Integer integer = null;
+        while (integer == null) {
+            System.out.print(question + VISUAL_AID);
+            try {
+                integer = in.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input!");
+            }
+        }
+        return integer;
     }
 
     @Override
     public double askDouble(String question) {
-        System.out.print(question + VISUAL_AID);
-        return in.nextDouble();
+        Double aDouble = null;
+        while (aDouble == null) {
+            System.out.print(question + VISUAL_AID);
+            try {
+                aDouble = in.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("Wrong input!");
+            }
+        }
+        return aDouble;
     }
 }

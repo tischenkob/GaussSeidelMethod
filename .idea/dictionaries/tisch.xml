@@ -2,6 +2,7 @@
   <dictionary name="tisch">
     <words>
       <w>coefs</w>
+      <w>runge</w>
       <w>seidel</w>
     </words>
   </dictionary>
