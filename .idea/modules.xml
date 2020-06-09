@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GaussSeidelMethod.iml" filepath="$PROJECT_DIR$/GaussSeidelMethod.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ComputationalMath.iml" filepath="$PROJECT_DIR$/ComputationalMath.iml" />
     </modules>
   </component>
 </project>

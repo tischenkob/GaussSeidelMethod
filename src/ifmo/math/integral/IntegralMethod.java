@@ -22,5 +22,5 @@ public abstract class IntegralMethod {
         return function;
     }
 
-    abstract Answer solve(double a, double b);
+    abstract Answer solve(double a, double b) throws InterruptedException;
 }

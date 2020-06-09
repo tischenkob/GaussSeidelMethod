@@ -19,6 +19,8 @@ public class TMApp implements App {
                         2) x^3 + x^2 - x / 4
                         3) x^5 - x^3
                         4) cos(x) * 2 + x / 2
+                        5) 1 / x
+                        6) sqrt(2x - 1)
                         > """);
         Function<Double, Double> func = switch (funcNumber) {
             case 0 -> x -> Math.sin((Double) x);
@@ -26,19 +28,25 @@ public class TMApp implements App {
             case 2 -> x -> Math.pow(x, 3) + Math.pow(x, 2) - x * 0.25;
             case 3 -> x -> Math.pow(x, 5) - Math.pow(x, 3);
             case 4 -> x -> Math.cos(x) * 2 + x / 2;
+            case 5 -> x -> 1 / x;
+            case 6 -> x -> Math.sqrt(2 * x - 1);
+            case 7 -> x -> Math.sin(1 / x);
             default -> throw new NoSuchElementException();
         };
         double precision = interviewer.askDouble("Precision: ");
         TrapezoidMethod method = new TrapezoidMethod(precision, func);
         double a = interviewer.askDouble("Choose [a: ");
         double b = interviewer.askDouble("Choose b]: ");
-        double sign = a <= b ? 1 : -1;
-        sign = a == b ? 0 : sign;
+        double sign = Double.compare(b, a);
         if (sign != 0) {
-            Answer<Double> answer = method.solve(a, b);
-            System.out.println("Solution: " + sign * answer.getSolution());
-            System.out.println("Partitions: " + answer.getPartitionAmount());
-            System.out.println("Error: " + answer.getError());
+            try {
+                Answer<Double> answer = method.solve(a, b);
+                System.out.println("Solution: " + sign * answer.getSolution());
+                System.out.println("Partitions: " + answer.getPartitionAmount());
+                System.out.println("Error: " + answer.getError());
+            } catch (InterruptedException e) {
+                System.out.println("Invalid argument or function continuity breach");
+            }
         } else {
             System.out.println("The answer is zero.");
         }
