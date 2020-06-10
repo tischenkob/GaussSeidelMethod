@@ -51,4 +51,9 @@ public class TMApp implements App {
             System.out.println("The answer is zero.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Trapezoid Method";
+    }
 }
