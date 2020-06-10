@@ -1,5 +1,6 @@
 import ifmo.app.App;
 import ifmo.app.GSMApp;
+import ifmo.app.SNAEApp;
 import ifmo.app.TMApp;
 import ifmo.interact.Interviewer;
 
@@ -14,7 +15,13 @@ public class Main {
         List<App> apps = new ArrayList<>();
         apps.add(new GSMApp());
         apps.add(new TMApp());
-        int i = interviewer.askInteger("Choose assignment:\n0) Gauss-Seidel Method\n1) Trapezoid Method\n> ");
+        apps.add(new SNAEApp());
+        System.out.println("Choose assignment:");
+        int j = 0;
+        for (var app : apps) {
+            System.out.println(j++ + ") " + app.toString());
+        }
+        int i = interviewer.askInteger("> ");
         apps.get(i).start();
     }
 }
