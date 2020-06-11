@@ -2,10 +2,10 @@ package ifmo.math.equations.nonlinear;
 
 import java.util.function.Function;
 
-class FixedPointIteration extends AbstractMethod {
+public class FixedPointIteration extends AbstractMethod {
     private final Function<Double, Double> function;
 
-    FixedPointIteration(Function<Double, Double> function) {
+    public FixedPointIteration(Function<Double, Double> function) {
         this.function = function;
     }
 
