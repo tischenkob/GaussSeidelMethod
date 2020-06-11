@@ -2,7 +2,7 @@ package ifmo.math.equations.nonlinear;
 
 import java.util.function.Function;
 
-class NewtonMethod extends AbstractMethod {
+public class NewtonMethod extends AbstractMethod {
     private final Function<Double, Double> function;
     private final Function<Double, Double> derivative;
 
